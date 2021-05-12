@@ -14,27 +14,34 @@ class User:
 
     def delete_movie(self, name):
         self.movies = list(filter(lambda x: x.name != name, self.movies))
+        """The above iterates a list of movies and if the movie name is not equal it keeps the movie, but it is match the name it deletes
+        from the list"""
 
     def watched_movies(self):
-        # watched_movie_list = []
-        #
-        # for movie in self.movies:
-        #     if movie.watched:
-        #         watched_movie_list.append(movie)
-        #
-        # return watched_movie_list
-        movies_watched = list(filter(lambda x: x.watched, self.movies))  # this one line replaces the above function!
-        return movies_watched
-
-    def save_to_file(self):
-        with open("{}.txt".format(self.name), 'w') as f:
-            f.write(self.name + "\n")
-            for movie in self.movies:
-                f.write(movie.name + "," + movie.genre + "," + str(movie.watched) + "\n")
+        return list(filter(lambda x: x.watched, self.movies))
 
 
-"""The above iterates a list of movies and if the movie name is not equal it keeps the movie, but it is match the name it deletes
-from the list"""
+    def json(self):
+        return {
+            'name': self.name,
+            'movies': [
+                movie.json() for movie in self.movies
+            ]
+        }
 
-# or like this  f.write("{},{},{}\n".format(movie.name,movie.genre,str(movie.watched)))
+    @classmethod
+    def from_json(cls, json_data):
+        user = User(json_data['name'])
+        movies =[]
+        for movie_data in json_data['movies']:
+            movies.append(Movie.from_json(movie_data))
+        user.movies = movies
+
+        return user
+
+
+
+
+
+
 
