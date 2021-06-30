@@ -17,6 +17,12 @@ class User:
         """The above iterates a list of movies and if the movie name is not equal it keeps the movie, but it is match the name it deletes
         from the list"""
 
+
+    def set_watched(self):
+        for movie in self.movies:
+            if movie.name == name:
+                movie.watched = True
+
     def watched_movies(self):
         return list(filter(lambda x: x.watched, self.movies))
 
