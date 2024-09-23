@@ -1,9 +1,9 @@
 for n in range(1,101):
     if n%3 == 0 and n%5 == 0:
-        print("fizzbuzz")
+        print("FizzBuzz")
     elif n%3 == 0:
-        print("fizz")
+        print("Fizz")
     elif n%5 == 0:
-        print("buzz")
+        print("Buzz")
     else:
         print(n)
