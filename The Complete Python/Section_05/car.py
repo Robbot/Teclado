@@ -15,11 +15,19 @@ class Garage:
     
     def add_car(self, car):
         if not isinstance(car, Car):
-            raise TypeError(f'Tried to add a `{car.__class__.__name__}` to the garage, but you can add only `Car` objects.')
+            raise ValueError(f'Tried to add a `{car.__class__.__name__}` to the garage, but you can add only `Car` objects.')
         self.cars.append(car)
         
 
 ford = Garage()
-car = Car('Ford', 'Fiesta')
-ford.add_car(car)
-print(len(ford))
+fiesta = Car('Ford', 'Fiesta'
+             )
+try:
+    ford.add_car('Fiesta')
+except TypeError:
+    print('Your car was not a Car!')
+except ValueError:
+    print('Something weird happened...')
+finally:
+    print(f'The garage now has {len(ford)} cars.')
+    
